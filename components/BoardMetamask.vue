@@ -1,7 +1,7 @@
 <template>
     <div class="relative min-h-[450px] bg-[#0C0310]/50 ring-1 ring-[#420076] backdrop-blur-sm">
-        <div v-if="false" class="absolute inset-0 flex items-center justify-center">
-            <NimblButton>
+        <div v-if="!isAuth" class="absolute inset-0 flex items-center justify-center">
+            <NimblButton @click="isAuth = !isAuth">
                 <div class="flex items-center justify-center gap-4">
                     <IconsLogoMetamask />
                     <p class="font-batman text-xl text-[#D39BFF]">CONNECT METAMASK</p>
@@ -26,7 +26,7 @@
                             inputmode="numeric"
                             pattern="[0-9]*"
                             type="text"
-                            class="inline max-w-[350px] bg-transparent font-batman text-[30px] uppercase !leading-none text-white/50 outline-none"
+                            class="inline max-w-[350px] bg-transparent font-batman text-[30px] uppercase !leading-none text-white outline-none"
                             placeholder="0" />
                     </div>
                     <div class="shrink-0">
@@ -41,7 +41,7 @@
                             inputmode="numeric"
                             pattern="[0-9]*"
                             type="text"
-                            class="inline max-w-[350px] bg-transparent font-batman text-[30px] uppercase !leading-none text-white/50 outline-none"
+                            class="inline max-w-[350px] bg-transparent font-batman text-[30px] uppercase !leading-none text-white outline-none"
                             placeholder="0" />
                     </div>
                     <div class="shrink-0">
@@ -49,7 +49,7 @@
                         <p class="mt-2 text-right font-graphik text-lg text-white/50">Balance: {{ 55 }}</p>
                     </div>
                     <div
-                        class="absolute left-1/2 top-0 flex h-[40px] w-[32px] -translate-x-1/2 -translate-y-1/2 items-center justify-center border-[6px] border-[#070309] bg-[#170A1C]">
+                        class="absolute left-1/2 top-0 flex h-[50px] w-[42px] -translate-x-1/2 -translate-y-1/2 items-center justify-center border-[6px] border-[#070309] bg-[#170A1C]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="15" fill="none" viewBox="0 0 12 15">
                             <path
                                 fill="#fff"
@@ -67,4 +67,6 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+const isAuth = ref(false);
+</script>
