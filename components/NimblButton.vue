@@ -1,10 +1,12 @@
 <template>
     <button
         class="relative isolate transition-all duration-300 hover:drop-shadow-[0px_0px_4px_#C780FF]"
-        :class="[size === 'md' ? 'h-[102px] w-[335px]' : ' h-[115px] w-[377px]']">
+        :class="[size === 'md' ? 'h-[102px] w-[335px] max-2xl:h-[91.3px] max-2xl:w-[300px]' : ' h-[115px] w-[377px]']">
         <div
             class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none"
-            :class="[size === 'md' ? 'h-[94.5px] w-[329px]' : ' h-[108px] w-[376px]']">
+            :class="[
+                size === 'md' ? 'h-[94.5px] w-[329px] max-2xl:h-[83.3px] max-2xl:w-[290px]' : ' h-[108px] w-[376px]',
+            ]">
             <svg
                 width="376"
                 height="108"

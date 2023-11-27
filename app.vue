@@ -1,27 +1,23 @@
 <template>
-    <div>
-        <div class="relative z-10 mx-auto flex justify-center">
-            <div class="relative z-10 my-5 grid grid-cols-[620px_640px_500px] gap-9">
-                <div>
-                    <BoardMetamask />
-                    <div class="mt-9" />
-                    <BoardTargetRaise />
+    <div class="h-[100lvh] overflow-hidden">
+        <div class="relative z-10 mx-auto flex h-full items-center justify-center">
+            <div class="container relative z-10 flex h-[calc(100lvh-40px)] gap-7 overflow-hidden">
+                <!-- grid-cols-[620px_640px_500px] -->
+                <div class="flex min-w-[450px] grow flex-col max-2xl:min-w-[400px]">
+                    <div class="min-h-[200px] shrink-0 grow"><BoardMetamask /></div>
+                    <div class="mt-7 max-h-[540px] grow overflow-hidden"><BoardTargetRaise /></div>
                 </div>
-                <div>
-                    <BoardNimblDescription />
-                    <div class="mt-9">
+                <div class="flex h-full max-w-[600px] shrink-0 flex-col justify-end max-2xl:max-w-[450px]">
+                    <div class="grow overflow-hidden"><BoardNimblDescription /></div>
+                    <div class="mt-7 shrink-0">
                         <NimblGridCards />
                     </div>
                 </div>
-                <div>
+                <div class="flex min-w-[26%] shrink-0 grow flex-col">
                     <NimblBanner />
+                    <div class="mt-7"><NimblTimer /></div>
                 </div>
             </div>
-            <!-- <p>Text</p>
-                <p class="font-batman">Text Batman</p>
-                <p class="font-graphik font-medium">Text graphik</p>
-                 -->
-            <!-- <div class="fixed inset-0 -z-0 bg-[url(noise.png)] opacity-50"></div> -->
         </div>
     </div>
 </template>
@@ -67,5 +63,18 @@ html {
     100% {
         --a: 360deg;
     }
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #420076 0%, #8c98ff 50%, #420076 100%);
+    border-radius: 15px;
 }
 </style>

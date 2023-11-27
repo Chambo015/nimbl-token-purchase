@@ -17,5 +17,6 @@ module.exports = {
                 endOfLine: "auto",
             },
         ],
+        "tailwindcss/no-custom-classname": 0,
     },
 };

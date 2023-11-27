@@ -5,9 +5,19 @@ const {fontFamily} = require("tailwindcss/defaultTheme");
 export default {
     theme: {
         extend: {
+            screens: {
+                "2xl": "1540px",
+            },
             fontFamily: {
                 batman: ["BatmanForever", ...fontFamily.sans],
                 graphik: ["Graphik", ...fontFamily.sans],
+            },
+        },
+        container: {
+            center: true,
+            padding: {
+                DEFAULT: "20px",
+                xl: 0,
             },
         },
     },
