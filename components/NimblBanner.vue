@@ -14,7 +14,7 @@
                         class="relative z-10 mx-auto max-w-[70%] transition-all delay-200 duration-1000 will-change-[max-width] group-hover:max-w-[80%] group-hover:delay-0"
                 /></picture>
                 <picture
-                    ><source srcset="podium.webp" type="image/webp" />
+                    ><source srcset="/podium.webp" type="image/webp" />
                     <img
                         src="/podium.png"
                         alt="podium"
