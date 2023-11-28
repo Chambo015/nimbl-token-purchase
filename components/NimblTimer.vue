@@ -1,6 +1,6 @@
 <template>
     <div class="relative isolate h-[256px] overflow-hidden max-2xl:h-[200px]">
-        <div id="waves" :style="waveStyles">
+        <div id="waves">
             <div class="wave wave--back">
                 <div class="water">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 32" preserveAspectRatio="none">

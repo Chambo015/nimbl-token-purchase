@@ -1,12 +1,12 @@
 <template>
     <div class="relative h-full border border-[#420076] bg-[#0C0310]/50 backdrop-blur-sm">
         <div v-if="!isAuth" class="absolute inset-0 flex items-center justify-center">
-            <NimblButton @click="isAuth = !isAuth">
+            <UiNimblButton :loading="isLoading" @click="onAuthMetamask">
                 <div class="flex items-center justify-center gap-4">
                     <IconsLogoMetamask />
                     <p class="font-batman text-xl text-[#D39BFF]">CONNECT METAMASK</p>
                 </div>
-            </NimblButton>
+            </UiNimblButton>
         </div>
         <div v-else class="p-7 max-2xl:p-5">
             <div class="flex items-center">
@@ -16,7 +16,7 @@
                 </div>
                 <p class="ml-4 font-graphik text-xl text-white max-2xl:text-base">0x19c....0b35c</p>
                 <button
-                    class="ml-auto flex h-[50px] w-[50px] items-center justify-center max-2xl:h-[40px] max-2xl:w-[40px]"
+                    class="ml-auto flex h-[50px] w-[50px] items-center justify-center hover:drop-shadow-[0px_0px_6px_#C780FF] max-2xl:h-[40px] max-2xl:w-[40px]"
                     @click="isAuth = !isAuth">
                     <IconsLogOut />
                 </button>
@@ -26,6 +26,7 @@
                     <div class="inline-flex flex-col justify-around">
                         <p class="font-graphik text-xl text-white/50 max-2xl:text-base">You pay</p>
                         <input
+                            v-model.number="inputPay"
                             inputmode="numeric"
                             pattern="[0-9]*"
                             type="text"
@@ -43,6 +44,7 @@
                     <div class="inline-flex flex-col justify-around">
                         <p class="font-graphik text-xl text-white/50 max-2xl:text-base">You receive</p>
                         <input
+                            v-model.number="inputReceive"
                             inputmode="numeric"
                             pattern="[0-9]*"
                             type="text"
@@ -66,14 +68,92 @@
                 </div>
             </div>
             <div class="mt-4 flex items-center justify-center">
-                <NimblButton size="md">
+                <UiNimblButton size="md" :disabled="!ablePurchase" @click="isOpenModal = true">
                     <p class="font-batman text-xl text-[#D39BFF]">PURCHASE</p>
-                </NimblButton>
+                </UiNimblButton>
             </div>
         </div>
+        <Teleport to="body">
+            <UiNimblModal v-if="isOpenModal">
+                <div>
+                    <button
+                        class="absolute right-0 top-0 flex h-[50px] w-[50px] items-center justify-center hover:bg-black/20"
+                        @click="isOpenModal = false">
+                        <IconsIconClose class="h-9 w-9" />
+                    </button>
+                    <p class="text-center font-graphik text-lg text-white max-2xl:text-base">Review Swap</p>
+                    <div class="mt-10 flex w-[600px] items-center justify-between px-8">
+                        <div>
+                            <p class="font-graphik text-xl text-white/50 max-2xl:text-base">You pay</p>
+                            <p class="font-batman text-3xl text-white max-2xl:text-xl">0.55 ETH</p>
+                            <p class="font-graphik text-xl text-white/50 max-2xl:text-base">$100.93</p>
+                        </div>
+                        <img src="/eth.png" alt="eth" width="122" height="55" class="max-2xl:w-[90px]" />
+                    </div>
+                    <div class="mt-7 flex items-center justify-between px-8">
+                        <div>
+                            <p class="font-graphik text-xl text-white/50 max-2xl:text-base">You receive</p>
+                            <p class="font-batman text-3xl text-white max-2xl:text-xl">8,354 nimbl</p>
+                        </div>
+                        <img src="/nimbl-token.png" alt="eth" width="122" height="55" class="max-2xl:w-[90px]" />
+                    </div>
+                    <ul class="mt-10 px-8 font-graphik [&>li]:text-lg [&>li]:max-2xl:text-base">
+                        <li class="flex justify-between">
+                            <span class="text-lg text-white/50">Rate</span>
+                            <span>1 NMBL = &lt;0.00001 ETH</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-lg text-white/50">Fee</span>
+                            <span>0 NMBL</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-lg text-white/50">Network cost</span>
+                            <span class="eth_logo">$8.57</span>
+                        </li>
+                    </ul>
+                    <div class="my-4 flex items-center justify-center">
+                        <UiNimblButton size="md" :disabled="!ablePurchase">
+                            <p class="font-batman text-xl text-[#D39BFF]">PURCHASE</p>
+                        </UiNimblButton>
+                    </div>
+                </div>
+            </UiNimblModal>
+        </Teleport>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const isAuth = ref(false);
+const isLoading = ref(false);
+const isOpenModal = ref(false);
+const inputPay = ref<number | null>(null);
+const inputReceive = ref<number | null>(null);
+
+const onAuthMetamask = async () => {
+    isLoading.value = true;
+    await new Promise<void>((resolve) => {
+        setTimeout(() => {
+            isAuth.value = true;
+            resolve();
+        }, 1500);
+    });
+    isLoading.value = false;
+};
+
+const ablePurchase = computed(() => {
+    if (typeof inputPay.value === "object") return false;
+    if (typeof inputReceive.value === "object") return false;
+    return inputPay.value > 0 && inputReceive.value > 0;
+});
 </script>
+
+<style scoped>
+.eth_logo::before {
+    content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDEyIDIwIj48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGZpbGw9IiMzNDM0MzQiIGQ9Im01Ljk5OCAwLS4xMy40NTZWMTMuNjhsLjEzLjEzNCA1Ljk5OC0zLjYyOUw1Ljk5OCAwWiIvPjxwYXRoIGZpbGw9IiM4QzhDOEMiIGQ9Ik01Ljk5OCAwIDAgMTAuMTg1bDUuOTk4IDMuNjI5VjBaIi8+PHBhdGggZmlsbD0iIzNDM0MzQiIgZD0ibTUuOTk4IDE0Ljk3Ni0uMDc0LjA5MnY0LjcxMWwuMDc0LjIyTDEyIDExLjM1bC02LjAwMiAzLjYyN1oiLz48cGF0aCBmaWxsPSIjOEM4QzhDIiBkPSJNNS45OTggMjB2LTUuMDI0TDAgMTEuMzUgNS45OTggMjBaIi8+PHBhdGggZmlsbD0iIzE0MTQxNCIgZD0ibTUuOTk4IDEzLjgxNCA1Ljk5OC0zLjYyOS01Ljk5OC0yLjc5djYuNDE5WiIvPjxwYXRoIGZpbGw9IiMzOTM5MzkiIGQ9Im0wIDEwLjE4NSA1Ljk5OCAzLjYyOVY3LjM5NUwwIDEwLjE4NVoiLz48L2c+PGRlZnM+PGNsaXBQYXRoIGlkPSJhIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwaDEydjIwSDB6Ii8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+");
+    width: 12px;
+    height: 20px;
+    display: inline;
+    margin-right: 7px;
+    vertical-align: middle;
+}
+</style>

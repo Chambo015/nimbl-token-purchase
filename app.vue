@@ -1,7 +1,7 @@
 <template>
     <div class="h-[100lvh] overflow-hidden">
         <div class="relative z-10 mx-auto flex h-full items-center justify-center">
-            <div class="container relative z-10 flex h-[calc(100lvh-40px)] gap-7 overflow-hidden">
+            <div class="relative z-10 flex h-[calc(100lvh-40px)] w-[95vw] gap-7 overflow-hidden">
                 <!-- grid-cols-[620px_640px_500px] -->
                 <div class="flex min-w-[450px] grow flex-col max-2xl:min-w-[400px]">
                     <div class="min-h-[200px] shrink-0 grow"><BoardMetamask /></div>
@@ -40,11 +40,12 @@ body {
     initial-value: -15deg;
 }
 body::before {
-    --line: rgba(154, 54, 247, 0.507);
+    --line: rgba(154, 54, 247, 0.7);
     content: "";
     height: 100vh;
     width: 100vw;
     position: fixed;
+    scroll-behavior: smooth;
     background:
         linear-gradient(90deg, var(--line) 1px, transparent 1px 10vmin) 0 -5vmin / 10vmin 10vmin,
         linear-gradient(var(--line) 1px, transparent 1px 10vmin) 0 -5vmin / 10vmin 10vmin;
@@ -55,6 +56,7 @@ body::before {
 }
 html {
     min-height: 100%;
+    scroll-behavior: smooth;
 }
 @keyframes animation-mask-body {
     0% {
@@ -74,7 +76,7 @@ html {
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #420076 0%, #8c98ff 50%, #420076 100%);
+    background: linear-gradient(180deg, #00000086 0%, #b0b2c4 50%, #00000081 100%);
     border-radius: 15px;
 }
 </style>

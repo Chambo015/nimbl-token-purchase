@@ -1,7 +1,12 @@
 <template>
     <button
         class="relative isolate transition-all duration-300 hover:drop-shadow-[0px_0px_4px_#C780FF]"
-        :class="[size === 'md' ? 'h-[102px] w-[335px] max-2xl:h-[91.3px] max-2xl:w-[300px]' : ' h-[115px] w-[377px]']">
+        :disabled="disabled"
+        :class="[
+            loading && 'cursor-wait drop-shadow-[0px_0px_4px_#C780FF]',
+            disabled && 'opacity-50 !drop-shadow-none',
+            size === 'md' ? 'h-[102px] w-[335px] max-2xl:h-[91.3px] max-2xl:w-[300px]' : ' h-[115px] w-[377px]',
+        ]">
         <div
             class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none"
             :class="[
@@ -80,9 +85,9 @@
                 </defs>
             </svg>
         </div>
-        <span class="relative z-10">
+        <div class="relative z-10 transition-all" :class="{'scale-90 opacity-70 blur-sm': loading}">
             <slot />
-        </span>
+        </div>
         <div
             aria-hidden="true"
             class="absolute right-0 top-0 h-[5px] w-[5px] rounded-full bg-[#C780FF] drop-shadow-[0px_0px_4px_#C780FF]" />
@@ -95,11 +100,21 @@
         <div
             aria-hidden="true"
             class="absolute bottom-0 right-0 h-[5px] w-[5px] rounded-full bg-[#C780FF] drop-shadow-[0px_0px_4px_#C780FF]" />
+        <div v-if="loading" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <span
+                class="ml-2 inline-block h-3 w-3 animate-pulse rounded-full bg-[#b95fff] [animation-duration:0.7s]"></span
+            ><span
+                class="ml-2 inline-block h-3 w-3 animate-pulse rounded-full bg-[#b95fff] [animation-duration:0.7s] [animation-delay:0.2s]"></span
+            ><span
+                class="ml-2 inline-block h-3 w-3 animate-pulse rounded-full bg-[#b95fff] [animation-duration:0.7s] [animation-delay:0.4s]"></span>
+        </div>
     </button>
 </template>
 
 <script setup lang="ts">
 defineProps<{
-    size: "md" | "sm";
+    size?: "md" | "sm";
+    loading?: boolean;
+    disabled?: boolean;
 }>();
 </script>
