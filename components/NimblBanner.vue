@@ -60,54 +60,6 @@
                     alt="smoke-image7"
                     src="/smokeCenter.webp" />
             </div>
-            <!--   <div
-                class="smoke-clouds absolute bottom-0 z-[3] hidden h-1/2 w-[150%] bg-[url('@/assets/preview/mobile_smoke.webp')] bg-[length:140%_auto] bg-bottom bg-no-repeat opacity-60 mix-blend-screen transition-opacity max-sm:block">
-                <picture>
-                    <source :srcset="smoke1Webp" type="image/webp" />
-                    <img
-                        width="1600"
-                        height="850"
-                        class="smoke-cloud1 absolute mix-blend-overlay pointer-events-none"
-                        alt="smoke-image1"
-                        :src="smoke1" />
-                </picture>
-                <picture>
-                    <source :srcset="smoke2Webp" type="image/webp" />
-                    <img
-                        width="1600"
-                        height="850"
-                        class="smoke-cloud2 absolute mix-blend-overlay pointer-events-none"
-                        alt="smoke-image2"
-                        :src="smoke2" />
-                </picture>
-                <picture>
-                    <source :srcset="smoke2Webp" type="image/webp" />
-                    <img
-                        width="1600"
-                        height="850"
-                        class="smoke-cloud4 absolute mix-blend-overlay pointer-events-none"
-                        alt="smoke-image4"
-                        :src="smoke2" />
-                </picture>
-                <picture>
-                    <source :srcset="smoke3Webp" type="image/webp" />
-                    <img
-                        width="1600"
-                        height="850"
-                        class="smoke-cloud3 absolute mix-blend-overlay pointer-events-none"
-                        alt="smoke-image3"
-                        :src="smoke3" />
-                </picture>
-                <picture>
-                    <source :srcset="centerSmokeWebp" type="image/webp" />
-                    <img
-                        width="950"
-                        height="444"
-                        class="smoke-cloud7 absolute mix-blend-overlay pointer-events-none"
-                        alt="smoke-image7"
-                        :src="centerSmoke"
-                /></picture>
-            </div> -->
         </section>
         <div class="absolute left-1/2 top-[5%] z-10 -translate-x-1/2">
             <img
