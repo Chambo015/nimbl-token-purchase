@@ -1,20 +1,22 @@
 <template>
-    <div class="h-[100lvh] overflow-hidden">
+    <div class="h-[100lvh] overflow-hidden max-md:overflow-auto">
         <div class="relative z-10 mx-auto flex h-full items-center justify-center">
-            <div class="relative z-10 flex h-[calc(100lvh-40px)] w-[95vw] gap-7 overflow-hidden">
+            <div
+                class="relative z-10 flex h-[calc(100lvh-40px)] w-[95vw] gap-7 overflow-hidden max-lg:flex-col max-md:h-screen max-md:w-screen max-md:overflow-auto max-md:overflow-x-hidden max-md:p-4 max-md:pb-20">
                 <!-- grid-cols-[620px_640px_500px] -->
-                <div class="flex min-w-[450px] grow flex-col max-2xl:min-w-[400px]">
+                <div class="flex min-w-[450px] grow flex-col max-2xl:min-w-[400px] max-md:min-w-full">
                     <div class="min-h-[200px] shrink-0 grow"><BoardMetamask /></div>
                     <div class="mt-7 max-h-[540px] grow overflow-hidden"><BoardTargetRaise /></div>
                 </div>
-                <div class="flex h-full max-w-[600px] shrink-0 flex-col justify-end max-2xl:max-w-[450px]">
-                    <div class="grow overflow-hidden"><BoardNimblDescription /></div>
+                <div
+                    class="flex h-full max-w-[600px] shrink-0 flex-col justify-end max-2xl:max-w-[450px] max-md:h-auto">
+                    <div class="grow overflow-hidden max-md:overflow-auto"><BoardNimblDescription /></div>
                     <div class="mt-7 shrink-0">
                         <NimblGridCards />
                     </div>
                 </div>
                 <div class="flex min-w-[26%] shrink-0 grow flex-col">
-                    <NimblBanner />
+                    <div class="h-full max-md:hidden"><NimblBanner /></div>
                     <div class="mt-7"><NimblTimer /></div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 <template>
-    <div class="relative isolate h-[256px] overflow-hidden max-2xl:h-[200px]">
+    <div
+        class="relative isolate h-[256px] overflow-hidden max-2xl:h-[200px] max-md:fixed max-md:inset-x-0 max-md:bottom-[-50px] max-md:h-[170px]">
         <div id="waves">
             <div class="wave wave--back">
                 <div class="water">

@@ -1,6 +1,6 @@
 <template>
     <button
-        class="relative isolate transition-all duration-300 hover:drop-shadow-[0px_0px_4px_#C780FF]"
+        class="relative isolate transition-all duration-300 hover:drop-shadow-[0px_0px_4px_#C780FF] max-md:aspect-[3.27] max-md:h-auto max-md:w-[90%]"
         :disabled="disabled"
         :class="[
             loading && 'cursor-wait drop-shadow-[0px_0px_4px_#C780FF]',
@@ -8,7 +8,7 @@
             size === 'md' ? 'h-[102px] w-[335px] max-2xl:h-[91.3px] max-2xl:w-[300px]' : ' h-[115px] w-[377px]',
         ]">
         <div
-            class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none"
+            class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none max-md:aspect-[3.48] max-md:h-auto max-md:w-full"
             :class="[
                 size === 'md' ? 'h-[94.5px] w-[329px] max-2xl:h-[83.3px] max-2xl:w-[290px]' : ' h-[108px] w-[376px]',
             ]">

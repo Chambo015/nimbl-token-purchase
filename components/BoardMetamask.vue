@@ -4,7 +4,7 @@
             <UiNimblButton :loading="isLoading" @click="onAuthMetamask">
                 <div class="flex items-center justify-center gap-4">
                     <IconsLogoMetamask />
-                    <p class="font-batman text-xl text-[#D39BFF]">CONNECT METAMASK</p>
+                    <p class="font-batman text-xl text-[#D39BFF] max-md:text-base">CONNECT METAMASK</p>
                 </div>
             </UiNimblButton>
         </div>
@@ -82,7 +82,7 @@
                         <IconsIconClose class="h-9 w-9" />
                     </button>
                     <p class="text-center font-graphik text-lg text-white max-2xl:text-base">Review Swap</p>
-                    <div class="mt-10 flex w-[600px] items-center justify-between px-8">
+                    <div class="mt-10 flex w-[600px] items-center justify-between px-8 max-md:w-[95vw]">
                         <div>
                             <p class="font-graphik text-xl text-white/50 max-2xl:text-base">You pay</p>
                             <p class="font-batman text-3xl text-white max-2xl:text-xl">0.55 ETH</p>
@@ -111,7 +111,7 @@
                             <span class="eth_logo">$8.57</span>
                         </li>
                     </ul>
-                    <div class="my-4 flex items-center justify-center">
+                    <div class="mx-auto my-4 flex w-[90%] items-center justify-center">
                         <UiNimblButton size="md" :disabled="!ablePurchase">
                             <p class="font-batman text-xl text-[#D39BFF]">PURCHASE</p>
                         </UiNimblButton>
