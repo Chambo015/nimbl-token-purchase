@@ -2,7 +2,7 @@
     <div
         class="relative isolate h-[256px] overflow-hidden max-2xl:h-[200px] max-md:fixed max-md:inset-x-0 max-md:bottom-[-50px] max-md:h-[170px]">
         <div id="waves">
-            <div class="wave wave--back">
+            <div class="wave wave--back max-md:opacity-80">
                 <div class="water">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 32" preserveAspectRatio="none">
                         <title>wave2</title>

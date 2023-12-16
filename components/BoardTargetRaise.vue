@@ -4,7 +4,7 @@
         <ul class="mb-7 max-2xl:mb-2 [&>li]:font-batman [&>li]:text-lg [&>li]:text-white/50 max-2xl:[&>li]:text-base">
             <li>
                 <span>TARGET RAISE:</span>
-                <span class="font-graphik text-xl text-[#D39BFF] max-2xl:text-lg"> $82.500</span>
+                <span class="font-graphik text-xl text-[#D39BFF] max-2xl:text-lg"> $50.000</span>
             </li>
             <li>
                 <span>VESTING:</span>
@@ -28,11 +28,10 @@
                 <span class="font-graphik text-xl text-white max-2xl:text-lg"> $378.125</span>
             </li>
         </ul>
-
-        <p class="mt-7 font-batman text-lg text-white/50 max-2xl:mt-5 max-2xl:text-base">PRE-SALE DATE:</p>
+        <!--  <p class="mt-7 font-batman text-lg text-white/50 max-2xl:mt-5 max-2xl:text-base">PRE-SALE DATE:</p>
         <p class="font-graphik text-xl text-white max-2xl:text-base">
             Sat, 25 Nov 2023 09:00 UTC - Wed, 29 Nov 2023 09:00 UTC
-        </p>
+        </p> -->
     </div>
 </template>
 
