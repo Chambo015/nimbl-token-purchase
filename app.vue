@@ -2,7 +2,7 @@
     <div class="h-[100lvh] overflow-hidden max-md:overflow-auto">
         <div class="relative z-10 mx-auto flex h-full items-center justify-center">
             <div
-                class="relative z-10 flex h-[calc(100lvh-40px)] w-[95vw] gap-7 overflow-hidden max-lg:flex-col max-md:h-screen max-md:w-screen max-md:overflow-auto max-md:overflow-x-hidden max-md:p-4 max-md:pb-20">
+                class="container relative z-10 flex h-[min(calc(100lvh-40px),_960px)] gap-7 overflow-hidden max-lg:flex-col max-md:h-screen max-md:w-screen max-md:overflow-auto max-md:overflow-x-hidden max-md:p-4 max-md:pb-20">
                 <!-- grid-cols-[620px_640px_500px] -->
                 <div class="flex min-w-[450px] grow flex-col max-2xl:min-w-[400px] max-md:min-w-full">
                     <div class="min-h-[200px] shrink-0 grow"><BoardMetamask /></div>

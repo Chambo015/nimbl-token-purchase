@@ -8,16 +8,22 @@
             </li>
             <li>
                 <span>VESTING:</span>
-                <span class="font-graphik text-xl text-white max-2xl:text-lg"> 25% TGE, 3 months Linear Vesting</span>
+                <span class="font-graphik text-xl text-white max-2xl:text-lg"> 20% TGE, 4 months Linear Vesting</span>
             </li>
         </ul>
-        <NimblProgress />
+        <NimblProgress :total="totalNimbl" />
         <ul class="mt-6 max-2xl:mt-1 [&>li]:font-batman [&>li]:text-lg [&>li]:text-white/50 max-2xl:[&>li]:text-base">
             <li>
                 <span>TOKEN TYPE:</span> <span class="font-graphik text-xl text-white max-2xl:text-lg"> ERC-20</span>
             </li>
             <li>
-                <span>TOKEN ADDRESS:</span> <span class="font-graphik text-xl text-white max-2xl:text-lg"> TBA</span>
+                <span>TOKEN ADDRESS:</span>
+                <a
+                    href="https://etherscan.io/token/0x4ac1d7358613894543e8ae0e1c9638d5403c795b"
+                    target="_blank"
+                    class="font-graphik text-xl text-blue-500 max-2xl:text-lg">
+                    $NIMBL</a
+                >
             </li>
             <li>
                 <span>TOTAL SUPPLY:</span>
@@ -35,4 +41,21 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+import axios from "axios";
+
+const totalNimbl = ref(0);
+
+const getTotalNimbl = async () => {
+    try {
+        const res = await axios.get<{token_amount: number}>("https://api.nimbl.tv/en/api/marketplace/token/amount/");
+        totalNimbl.value = res.data.token_amount / 10 ** 18;
+    } catch (error) {
+        console.log("error totalNimbl", error);
+    }
+};
+
+onMounted(async () => {
+    await getTotalNimbl();
+});
+</script>

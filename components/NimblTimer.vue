@@ -33,7 +33,7 @@
         </div>
         <p
             class="absolute left-1/2 top-1/2 z-20 w-full -translate-x-1/2 -translate-y-1/2 text-center font-batman text-[36px] max-2xl:text-[28px]">
-            1 : 24 : 59 : 59
+            18.12.2023 16:00 PM UTC
         </p>
     </div>
 </template>
