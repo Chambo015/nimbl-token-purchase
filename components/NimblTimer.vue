@@ -31,14 +31,51 @@
                 </div>
             </div>
         </div>
-        <p
-            class="absolute left-1/2 top-1/2 z-20 w-full -translate-x-1/2 -translate-y-1/2 text-center font-batman text-[36px] max-2xl:text-[28px]" >
-            18.12.2023 16:00 PM UTC
-        </p>
+        <div
+            class="absolute left-1/2 top-1/2 z-20 w-full -translate-x-1/2 -translate-y-1/2 text-center font-batman text-[36px] max-2xl:text-[28px]">
+            {{ displayHours }} : {{ displayMinutes }} : {{ displaySeconds }}
+            <p class="font-graphik text-base">Time left</p>
+        </div>
     </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+/* 18.12.2023 16:00 PM UTC */
+const displayDays = ref<string | number>(0);
+const displayHours = ref<string | number>(0);
+const displayMinutes = ref<string | number>(0);
+const displaySeconds = ref<string | number>(0);
+
+const _seconds = computed(() => 1000);
+const _minutes = computed(() => _seconds.value * 60);
+const _hours = computed(() => _minutes.value * 60);
+const _days = computed(() => _hours.value * 24);
+
+const showRemaining = () => {
+    const timer = setInterval(() => {
+        const now = new Date();
+        const end = new Date("2023-12-18T16:00Z");
+        const distance = end.getTime() - now.getTime();
+
+        if (distance < 0) {
+            clearInterval(timer);
+            return;
+        }
+
+        const days = Math.floor(distance / _days.value);
+        const hours = Math.floor((distance % _days.value) / _hours.value);
+        const minutes = Math.floor((distance % _hours.value) / _minutes.value);
+        const seconds = Math.floor((distance % _minutes.value) / _seconds.value);
+
+        displaySeconds.value = seconds < 10 ? "0" + seconds : seconds;
+        displayMinutes.value = minutes < 10 ? "0" + minutes : minutes;
+        displayHours.value = hours < 10 ? "0" + hours : hours;
+        displayDays.value = days < 10 ? "0" + days : days;
+    }, 1000);
+};
+
+onMounted(() => showRemaining());
+</script>
 
 <style scoped>
 .waves {

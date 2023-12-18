@@ -21,85 +21,104 @@
                     <IconsLogOut />
                 </button>
             </div>
-            <div v-if="!user.is_token_bought" class="mt-6 max-2xl:mt-4">
-                <div class="relative flex justify-between bg-[#170A1C] py-3 pl-5 pr-2 max-2xl:py-2">
-                    <div class="inline-flex flex-col justify-around">
-                        <p class="font-graphik text-xl text-white/50 max-2xl:text-base">You pay</p>
-                        <input
-                            v-model.number="inputPay"
-                            inputmode="numeric"
-                            pattern="[0-9]*"
-                            type="text"
-                            class="inline w-full max-w-full bg-transparent font-batman text-[30px] uppercase !leading-none text-white outline-none max-2xl:text-[26px]"
-                            placeholder="0"
-                            @input="convertNimbl" />
+            <template v-if="!user.is_token_bought">
+                <div class="mt-6 max-2xl:mt-4">
+                    <div class="relative flex justify-between bg-[#170A1C] py-3 pl-5 pr-2 max-2xl:py-2">
+                        <div class="inline-flex flex-col justify-around">
+                            <p class="font-graphik text-xl text-white/50 max-2xl:text-base">You pay</p>
+                            <input
+                                v-model.number="inputPay"
+                                inputmode="numeric"
+                                pattern="[0-9]*"
+                                type="text"
+                                class="inline w-full max-w-full bg-transparent font-batman text-[30px] uppercase !leading-none text-white outline-none max-2xl:text-[26px]"
+                                :class="[errorLimitPay && 'text-red-500']"
+                                placeholder="0"
+                                @input="convertNimbl" />
+                        </div>
+                        <div class="flex shrink-0 flex-col items-end">
+                            <img src="/eth.png" alt="eth" width="122" height="55" class="max-2xl:w-[90px]" />
+                            <p
+                                :title="user.balanceETH.toString()"
+                                class="mt-2 max-w-[135px] truncate text-right font-graphik text-lg text-white/50 hover:max-w-max max-2xl:text-base">
+                                Balance: {{ user.balanceETH }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="flex shrink-0 flex-col items-end">
-                        <img src="/eth.png" alt="eth" width="122" height="55" class="max-2xl:w-[90px]" />
-                        <p
-                            :title="user.balanceETH.toString()"
-                            class="mt-2 max-w-[135px] truncate text-right font-graphik text-lg text-white/50 hover:max-w-max max-2xl:text-base">
-                            Balance: {{ user.balanceETH }}
-                        </p>
+                    <div class="relative mt-1.5 flex justify-between bg-[#170A1C] py-3 pl-5 pr-2 max-2xl:py-2">
+                        <div class="inline-flex flex-col justify-around">
+                            <p class="font-graphik text-xl text-white/50 max-2xl:text-base">You receive</p>
+                            <input
+                                v-model.number="inputReceive"
+                                inputmode="numeric"
+                                pattern="[0-9]*"
+                                type="text"
+                                class="inline w-full max-w-full bg-transparent font-batman text-[30px] uppercase !leading-none text-white outline-none max-2xl:text-[26px]"
+                                :class="[errorLimitBuy && 'text-red-500']"
+                                placeholder="0"
+                                @input="convertETH" />
+                        </div>
+                        <div class="flex shrink-0 flex-col items-end">
+                            <img src="/nimbl-token.png" alt="eth" width="122" height="55" class="max-2xl:w-[90px]" />
+                            <p
+                                :title="user.nimbl_amount.toString()"
+                                class="mt-2 max-w-[135px] truncate text-right font-graphik text-lg text-white/50 hover:max-w-max max-2xl:text-base">
+                                Balance: {{ user.nimbl_amount }}
+                            </p>
+                        </div>
+                        <div
+                            class="absolute left-1/2 top-0 flex h-[50px] w-[42px] -translate-x-1/2 -translate-y-1/2 items-center justify-center border-[6px] border-[#070309] bg-[#170A1C]">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="12"
+                                height="15"
+                                fill="none"
+                                viewBox="0 0 12 15">
+                                <path
+                                    fill="#fff"
+                                    d="m7.014 14.52 4.741-4.741a.816.816 0 0 0 0-1.166.816.816 0 0 0-1.166 0l-3.342 3.342V.824A.83.83 0 0 0 6.423 0a.83.83 0 0 0-.824.824V11.94L2.256 8.613a.816.816 0 0 0-1.166 0 .85.85 0 0 0-.248.59c0 .218.077.42.248.591l4.758 4.757a.85.85 0 0 0 .59.249c.202-.031.42-.124.576-.28Z" />
+                            </svg>
+                        </div>
+                        <div
+                            v-if="errorLimitBuy"
+                            class="absolute bottom-0 left-1/2 -translate-x-1/2 font-graphik text-red-500">
+                            Max {{ MAX_BUY_NIMBL }} NIMBL
+                        </div>
+                        <div
+                            v-if="errorLimitPay"
+                            class="absolute bottom-0 left-1/2 -translate-x-1/2 font-graphik text-red-500">
+                            Insufficient Funds
+                        </div>
                     </div>
                 </div>
-                <div class="relative mt-1.5 flex justify-between bg-[#170A1C] py-3 pl-5 pr-2 max-2xl:py-2">
-                    <div class="inline-flex flex-col justify-around">
-                        <p class="font-graphik text-xl text-white/50 max-2xl:text-base">You receive</p>
-                        <input
-                            v-model.number="inputReceive"
-                            inputmode="numeric"
-                            pattern="[0-9]*"
-                            type="text"
-                            class="inline w-full max-w-full bg-transparent font-batman text-[30px] uppercase !leading-none text-white outline-none max-2xl:text-[26px]"
-                            :class="[errorLimitBuy && 'text-red-500']"
-                            placeholder="0"
-                            @input="convertETH" />
-                    </div>
-                    <div class="flex shrink-0 flex-col items-end">
-                        <img src="/nimbl-token.png" alt="eth" width="122" height="55" class="max-2xl:w-[90px]" />
-                        <p
-                            :title="user.nimbl_amount.toString()"
-                            class="mt-2 max-w-[135px] truncate text-right font-graphik text-lg text-white/50 hover:max-w-max max-2xl:text-base">
-                            Balance: {{ user.nimbl_amount }}
-                        </p>
-                    </div>
-                    <div
-                        class="absolute left-1/2 top-0 flex h-[50px] w-[42px] -translate-x-1/2 -translate-y-1/2 items-center justify-center border-[6px] border-[#070309] bg-[#170A1C]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="15" fill="none" viewBox="0 0 12 15">
-                            <path
-                                fill="#fff"
-                                d="m7.014 14.52 4.741-4.741a.816.816 0 0 0 0-1.166.816.816 0 0 0-1.166 0l-3.342 3.342V.824A.83.83 0 0 0 6.423 0a.83.83 0 0 0-.824.824V11.94L2.256 8.613a.816.816 0 0 0-1.166 0 .85.85 0 0 0-.248.59c0 .218.077.42.248.591l4.758 4.757a.85.85 0 0 0 .59.249c.202-.031.42-.124.576-.28Z" />
-                        </svg>
-                    </div>
-                    <div
-                        v-if="errorLimitBuy"
-                        class="absolute bottom-0 left-1/2 -translate-x-1/2 font-graphik text-red-500">
-                        Max {{ MAX_BUY_NIMBL }} NIMBL
-                    </div>
+                <div class="mt-4 flex items-center justify-center">
+                    <UiNimblButton
+                        size="md"
+                        :disabled="!ablePurchase || errorLimitBuy || errorLimitPay"
+                        @click="isOpenModal = true">
+                        <p class="font-batman text-xl text-[#D39BFF]">PURCHASE</p>
+                    </UiNimblButton>
                 </div>
-            </div>
-            <div v-if="user.is_token_bought" class="mt-7 flex justify-between overflow-hidden">
-                <div class="flex flex-col items-start truncate font-batman text-lg">
-                    <p class="text-blue-500">Purchased:</p>
-                    <p class="truncate">{{ user.nimbl_amount }}</p>
+            </template>
+
+            <template v-if="user.is_token_bought">
+                <div class="mt-7 flex justify-between overflow-hidden">
+                    <div class="flex flex-col items-start truncate font-batman text-lg">
+                        <p class="text-blue-500">Purchased:</p>
+                        <p class="truncate">{{ user.nimbl_amount }}</p>
+                    </div>
+                    <img src="/nimbl-token.png" alt="eth" width="122" height="55" class="shrink-0 max-2xl:w-[90px]" />
                 </div>
-                <img src="/nimbl-token.png" alt="eth" width="122" height="55" class="shrink-0 max-2xl:w-[90px]" />
-            </div>
-            <div v-if="!user.is_token_bought" class="mt-4 flex items-center justify-center">
-                <UiNimblButton size="md" :disabled="!ablePurchase || errorLimitBuy" @click="isOpenModal = true">
-                    <p class="font-batman text-xl text-[#D39BFF]">PURCHASE</p>
-                </UiNimblButton>
-            </div>
-            <div v-if="user.is_token_bought" class="mt-4 flex items-center justify-center">
-                <UiNimblButton size="md" :disabled="!user.is_token_bought" @click="claim()">
-                    <p class="font-batman text-xl text-[#D39BFF]">CLAIM TOKENS</p>
-                </UiNimblButton>
-            </div>
+                <div class="mt-4 flex items-center justify-center">
+                    <UiNimblButton size="md" :disabled="!user.is_token_bought" @click="claim()">
+                        <p class="font-batman text-xl text-[#D39BFF]">CLAIM TOKENS</p>
+                    </UiNimblButton>
+                </div>
+            </template>
         </div>
         <Teleport to="body">
             <UiNimblModal v-if="isOpenModal">
-                <div>
+                <div v-if="!isLoading">
                     <button
                         class="absolute right-0 top-0 flex h-[50px] w-[50px] items-center justify-center hover:bg-black/20"
                         @click="isOpenModal = false">
@@ -130,10 +149,6 @@
                             <span class="text-lg text-white/50">Fee</span>
                             <span>0 NMBL</span>
                         </li>
-                        <!-- <li class="flex justify-between">
-                            <span class="text-lg text-white/50">Network cost</span>
-                            <span class="eth_logo">$8.57</span>
-                        </li> -->
                     </ul>
                     <div class="mx-auto my-4 flex w-[90%] items-center justify-center">
                         <UiNimblButton size="md" :disabled="!ablePurchase" @click="buy">
@@ -141,6 +156,34 @@
                         </UiNimblButton>
                     </div>
                 </div>
+                <div v-else>
+                    <video
+                        autoplay="true"
+                        loop="true"
+                        muted="true"
+                        height="110"
+                        width="110"
+                        src="/Loader.gif.mp4"
+                        class="mx-auto mix-blend-lighten"></video>
+                    <p class="text-center font-graphik text-lg font-medium text-white">Confirm Swap</p>
+                    <div class="my-3 flex items-center gap-3 px-5">
+                        <IconsIconEth />
+                        <p class="font-batman text-xl text-white">{{ inputPay?.toFixed(6) }} ETH</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="12" fill="none" viewBox="0 0 15 12">
+                            <path
+                                fill="#fff"
+                                d="M14.52 4.986 9.78.245a.816.816 0 0 0-1.166 0 .816.816 0 0 0 0 1.166l3.342 3.342H.824A.83.83 0 0 0 0 5.577a.83.83 0 0 0 .824.824H11.94L8.613 9.744a.816.816 0 0 0 0 1.166.85.85 0 0 0 .59.248c.218 0 .42-.077.591-.248l4.757-4.758a.85.85 0 0 0 .249-.59 1.056 1.056 0 0 0-.28-.576Z" />
+                        </svg>
+                        <img
+                            src="/currencyNimbl.png"
+                            alt="currencyNimbl"
+                            width="19"
+                            height="22"
+                            class="h-[22px] w-[19px] shrink-0" />
+                        <p class="font-batman text-xl text-white">{{ inputReceive?.toFixed(5) }} nimbl</p>
+                    </div>
+                </div>
+                <p class="mt-6 text-center font-graphik text-white/50">Proceed in your wallet</p>
             </UiNimblModal>
         </Teleport>
     </div>
@@ -153,12 +196,14 @@ import {MAX_BUY_NIMBL} from "~/constants/index";
 
 const user = ref<IUser | null>(null);
 const isLoading = ref(false);
+const isSuccessBuy = ref(false);
 const isOpenModal = ref(false);
 const inputPay = ref<number | null>(null);
 const inputReceive = ref<number | null>(null);
 const errorLimitBuy = ref(false);
+const errorLimitPay = ref(false);
 
-const {handleAuth, buyTokens, claimTokens} = useMetamask();
+const {handleAuth, buyTokens, claimTokens, checkUserTokens} = useMetamask();
 
 const onAuthMetamask = async () => {
     try {
@@ -203,11 +248,24 @@ const buy = async () => {
     if (typeof inputReceive.value === "object") return false;
     if (inputReceive.value > MAX_BUY_NIMBL) return false;
 
-    isLoading.value = true;
-    const successBuyTokens = await buyTokens(inputReceive.value, inputPay.value);
+    try {
+        isLoading.value = true;
 
-    console.log("successBuyTokens", successBuyTokens);
-    isLoading.value = false;
+        const successBuyTokens = await buyTokens(inputReceive.value, inputPay.value);
+
+        if (successBuyTokens) {
+            console.log("successBuyTokens", successBuyTokens);
+            isSuccessBuy.value = true;
+            const isTokenBought = await checkUserTokens();
+            if (user.value && isTokenBought) {
+                user.value = {...user.value, is_token_bought: isTokenBought};
+            }
+        }
+    } catch (error) {
+    } finally {
+        isLoading.value = false;
+        isOpenModal.value = false;
+    }
 };
 
 const claim = async () => {

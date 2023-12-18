@@ -83,7 +83,7 @@ const useMetamask = () => {
                 throw new Error("No account found");
             }
             /* && chain === "0x1" */
-            if (!chain || chain !== "0x1") {
+            if (!chain) {
                 throw new Error("No chain found or You need to change to ETH chain");
             }
 
@@ -117,25 +117,28 @@ const useMetamask = () => {
             isLoading.value = true;
             const computedToken = ethers.parseEther(token.toFixed(18));
             let computedEth = ethers.parseEther(eth.toFixed(18));
-            const ethAmount = computedToken * ethers.parseEther(String(6200000000000)) / ethers.parseEther(String(10**18));
-            if(ethAmount - computedEth < 0){
-                computedEth += (ethAmount - computedEth)
+            const ethAmount =
+                (computedToken * ethers.parseEther(String(6200000000000))) / ethers.parseEther(String(10 ** 18));
+            if (ethAmount - computedEth < 0) {
+                computedEth += ethAmount - computedEth;
             }
+
             try {
                 await marketplaceContract.swapTokens(computedToken, {value: computedEth});
             } catch (error) {
                 console.log("error swapTokens swapTokens", error);
+                return false;
             }
 
-            const res = await handleApiPost(
+            /*  const res = await handleApiPost(
                 "https://api.nimbl.tv/en/api/marketplace/token/buy/",
                 {
                     token_quantity: token,
                 },
                 userMetamask.value.token,
             );
-
-            return res;
+ */
+            return true;
         } catch (error) {
             console.error("error buy Tokens", error);
         } finally {
