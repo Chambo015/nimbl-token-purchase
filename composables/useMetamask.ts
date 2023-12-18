@@ -83,7 +83,7 @@ const useMetamask = () => {
                 throw new Error("No account found");
             }
             /* && chain === "0x1" */
-            if (!chain) {
+            if (!chain || chain !== "0x1") {
                 throw new Error("No chain found or You need to change to ETH chain");
             }
 
