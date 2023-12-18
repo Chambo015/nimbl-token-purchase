@@ -124,7 +124,7 @@
                     <ul class="mt-10 px-8 font-graphik [&>li]:text-lg [&>li]:max-2xl:text-base">
                         <li class="flex justify-between">
                             <span class="text-lg text-white/50">Rate</span>
-                            <span>1 NMBL = &lt;0.00045 ETH</span>
+                            <span>1 NMBL = &lt;0.0000062 ETH</span>
                         </li>
                         <li class="flex justify-between">
                             <span class="text-lg text-white/50">Fee</span>
@@ -184,7 +184,7 @@ const ablePurchase = computed(() => {
 const convertNimbl = () => {
     if (inputPay.value) {
         errorLimitBuy.value = false;
-        inputReceive.value = inputPay.value / 0.00045;
+        inputReceive.value = inputPay.value / 0.0000062;
         if (inputReceive.value < MAX_BUY_NIMBL) return;
         errorLimitBuy.value = true;
     }
@@ -192,7 +192,7 @@ const convertNimbl = () => {
 const convertETH = () => {
     if (inputReceive.value) {
         errorLimitBuy.value = false;
-        inputPay.value = inputReceive.value * 0.00045;
+        inputPay.value = inputReceive.value * 0.0000062;
         if (inputReceive.value < MAX_BUY_NIMBL) return;
         errorLimitBuy.value = true;
     }

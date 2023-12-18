@@ -8,8 +8,8 @@ declare global {
     var ethereum: any;
 }
 
-const marketplaceAddress = "0xcdD2245D668d5c15E5fEfD34787762D4fe1d479d";
-const nimblAddress = "0x9A6A62c21C2e12a3CcA305b9AdCf1a48fe17852f";
+const marketplaceAddress = "0x9BC8Bc8cD77aCa59a4fC21d0E19CA5df013e2695";
+const nimblAddress = "0x4aC1D7358613894543e8AE0E1c9638d5403C795b";
 let marketplaceContract = new ethers.Contract(marketplaceAddress, MARKETPLACE_ABI); // ethers.BaseContract
 let nimblContract = new ethers.Contract(nimblAddress, NIMBL_ABI);
 
@@ -83,7 +83,7 @@ const useMetamask = () => {
                 throw new Error("No account found");
             }
             /* && chain === "0x1" */
-            if (!chain) {
+            if (!chain || chain !== "0x1") {
                 throw new Error("No chain found or You need to change to ETH chain");
             }
 
@@ -115,12 +115,12 @@ const useMetamask = () => {
         try {
             if (!userMetamask.value) return;
             isLoading.value = true;
-            const computedToken = ethers.parseEther(token.toString());
-            const computedEth = ethers.parseEther(eth.toString());
-
-            console.log("computedEth", computedEth);
-            console.log("computedToken", computedToken);
-
+            const computedToken = ethers.parseEther(token.toFixed(18));
+            let computedEth = ethers.parseEther(eth.toFixed(18));
+            const ethAmount = computedToken * ethers.parseEther(String(6200000000000)) / ethers.parseEther(String(10**18));
+            if(ethAmount - computedEth < 0){
+                computedEth += (ethAmount - computedEth)
+            }
             try {
                 await marketplaceContract.swapTokens(computedToken, {value: computedEth});
             } catch (error) {

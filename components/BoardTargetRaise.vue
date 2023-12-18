@@ -4,34 +4,38 @@
         <ul class="mb-7 max-2xl:mb-2 [&>li]:font-batman [&>li]:text-lg [&>li]:text-white/50 max-2xl:[&>li]:text-base">
             <li>
                 <span>TARGET RAISE:</span>
-                <span class="font-graphik text-xl text-[#D39BFF] max-2xl:text-lg"> $50.000</span>
+                <span style="color:white"> $50.000</span>
             </li>
             <li>
                 <span>VESTING:</span>
-                <span class="font-graphik text-xl text-white max-2xl:text-lg"> 20% TGE, 4 months Linear Vesting</span>
+                <span style="color:white"> 4 months Linear</span>
+            </li>
+            <li>
+                <span>TGE:</span>
+                <span style="color:white"> 20%</span>
             </li>
         </ul>
         <NimblProgress :total="totalNimbl" />
         <ul class="mt-6 max-2xl:mt-1 [&>li]:font-batman [&>li]:text-lg [&>li]:text-white/50 max-2xl:[&>li]:text-base">
             <li>
-                <span>TOKEN TYPE:</span> <span class="font-graphik text-xl text-white max-2xl:text-lg"> ERC-20</span>
+                <span>TOKEN TYPE:</span> <span style="color:white"> ERC-20</span>
             </li>
             <li>
                 <span>TOKEN ADDRESS:</span>
                 <a
                     href="https://etherscan.io/token/0x4ac1d7358613894543e8ae0e1c9638d5403c795b"
                     target="_blank"
-                    class="font-graphik text-xl text-blue-500 max-2xl:text-lg">
+                    style="color:white">
                     $NIMBL</a
                 >
             </li>
             <li>
                 <span>TOTAL SUPPLY:</span>
-                <span class="font-graphik text-xl text-white max-2xl:text-lg"> 800.000.000 Nimbl</span>
+                <span style="color:white"> 800.000.000 Nimbl</span>
             </li>
             <li>
                 <span>INITIAL MARKET CAP:</span>
-                <span class="font-graphik text-xl text-white max-2xl:text-lg"> $378.125</span>
+                <span style="color:white"> $378.125</span>
             </li>
         </ul>
         <!--  <p class="mt-7 font-batman text-lg text-white/50 max-2xl:mt-5 max-2xl:text-base">PRE-SALE DATE:</p>

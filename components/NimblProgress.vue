@@ -1,8 +1,8 @@
 <template>
     <div class="w-full pb-[45px]">
         <div class="mb-2 flex justify-between gap-4">
-            <p class="truncate font-batman text-lg text-white">{{ Math.round(totalNimbl) }} NIMBL</p>
-            <p class="truncate font-batman text-lg text-white">3,636,364 NIMBL</p>
+            <p class="truncate font-batman text-lg text-white" style="color: blueviolet;">{{ Math.round(totalNimbl) }} NIMBL</p>
+            <p class="truncate font-batman text-lg text-white" style="color: blueviolet;">3,636,364 NIMBL</p>
         </div>
         <div class="relative isolate mb-[2px] h-[5px] border-b border-white">
             <span class="absolute bottom-0 left-0 z-20 h-[5px] w-px bg-white" />
